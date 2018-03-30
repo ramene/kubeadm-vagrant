@@ -9,7 +9,7 @@ Installation
 
 - Clone the kubeadm-vagrant repo
 
-```git clone https://github.com/coolsvap/kubeadm-vagrant ```
+```git clone https://github.com/arashkaffamanesh/kubeadm-vagrant ```
 
 - Choose your distribution of choice from CentOS/Ubuntu and move to the specific directory.
 - Configure the cluster parameters in Vagrantfile. Refer below for details of configuration options.
