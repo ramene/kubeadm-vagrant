@@ -55,6 +55,11 @@ node2     Ready     <none>    28m       v1.10.0
 
 --> Celebrate ;-)
 
+N.B.: if you'd like to merge your kube.config with ~/.kube/config do the folowing:
+KUBECONFIG=~/.kube/config:./kube.config kubectl config view --flatten --> config
+cp ~/.kube/config ~/.kube/config_backup
+cp config ~/.kube/config
+
 ```
 1. ``` BOX_IMAGE ``` is currently default with &quot;coolsvap/centos-k8s&quot; box which is custom box created which can be used for setting up the cluster with basic dependencies for kubernetes node.
 2. Set ``` SETUP_MASTER ``` to true if you want to setup the node. This is true by default for spawning a new cluster. You can skip it for adding new minions.
