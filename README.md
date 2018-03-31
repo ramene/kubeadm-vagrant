@@ -28,7 +28,7 @@ sudo su
 kubectl get pods --all-namespaces
 kubeadm token create
 148a37.736fd53655b767b7
---> we need to set this token in for KUBETOKEN Vagrantfile
+--> we need to set this token for KUBETOKEN in our Vagrantfile
 ```
 
 - Spin up the nodes
