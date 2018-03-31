@@ -54,5 +54,14 @@ node1     Ready     <none>    30m       v1.10.0
 node2     Ready     <none>    28m       v1.10.0
 
 --> Celebrate ;-)
-```
 
+```
+1. ``` BOX_IMAGE ``` is currently default with &quot;coolsvap/centos-k8s&quot; box which is custom box created which can be used for setting up the cluster with basic dependencies for kubernetes node.
+2. Set ``` SETUP_MASTER ``` to true if you want to setup the node. This is true by default for spawning a new cluster. You can skip it for adding new minions.
+3. Set ``` SETUP_NODES ``` to false by the first run, after the master is created and you run ```kubeadm token create``` on master an update your vagrantfile with the token, then you need to set ``` SETUP_NODES ``` to true.
+4. Specify ``` NODE_COUNT ``` as the count of minions in the cluster
+5. Specify  the ``` MASTER_IP ``` as static IP which can be referenced for other cluster configurations
+6. Specify ``` NODE_IP_NW ``` as the network IP which can be used for assigning dynamic IPs for cluster nodes from the same network as Master
+7. Specify custom ``` POD_NW_CIDR ``` of your choice
+8. Setting up kubernetes dashboard is still a WIP with ``` K8S_DASHBOARD ``` option.
+```
