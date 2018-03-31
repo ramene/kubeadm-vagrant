@@ -16,24 +16,26 @@ Installation
 
 ``` vi Vagrantfile ```
 
-- Spin up the cluster
+- Spin up the master
 
 ``` vagrant up ```
 
-- This will spin up new Kubernetes cluster. You can check the status of cluster with following command,
+- This will spin up the Kubernetes master. You can check the status of cluster with following command,
 
 ```
+vagrant ssh master
 sudo su
 kubectl get pods --all-namespaces
-
+kubeadm token create
+148a37.736fd53655b767b7 --> you need to set this token in vagrantfile
 ```
-Cluster Configuration Options
 
-1. You need to generate a KUBETOKEN of your choice to be used while creating the cluster. You will need to install kubeadm package on your host to create the token with following command
+- Spin up the nodes
 
-```
-# kubeadm token generate 
-148a37.736fd53655b767b7
+set SETUP_NODES = true in Vagrantfile
+
+``` vagrant up ```
+
 
 ```
 1. ``` BOX_IMAGE ``` is currently default with &quot;coolsvap/centos-k8s&quot; box which is custom box created which can be used for setting up the cluster with basic dependencies for kubernetes node.
