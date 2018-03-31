@@ -27,7 +27,8 @@ vagrant ssh master
 sudo su
 kubectl get pods --all-namespaces
 kubeadm token create
-148a37.736fd53655b767b7 --> you need to set this token in vagrantfile
+148a37.736fd53655b767b7
+--> we need to set this token in for KUBETOKEN Vagrantfile
 ```
 
 - Spin up the nodes
