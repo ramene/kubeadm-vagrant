@@ -1,6 +1,6 @@
 BOX_IMAGE = "coolsvap/centos-k8s"
 SETUP_MASTER = true
-SETUP_NODES = false
+SETUP_NODES = false 
 NODE_COUNT = 2
 MASTER_IP = "192.168.26.10"
 NODE_IP_NW = "192.168.26."
@@ -8,7 +8,7 @@ POD_NW_CIDR = "10.244.0.0/16"
 K8S_DASHBOARD = true
 
 #Generate new using steps in README
-KUBETOKEN = "b029ee.968a33e8d8e6bb0d"
+KUBETOKEN = "b7x94e.onotdvdjic8p9w19"
 
 $kubeminionscript = <<MINIONSCRIPT
 
