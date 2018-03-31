@@ -36,13 +36,22 @@ set SETUP_NODES = true in Vagrantfile
 
 ``` vagrant up ```
 
+- Copy kubeconfig to your machine
 
 ```
-1. ``` BOX_IMAGE ``` is currently default with &quot;coolsvap/centos-k8s&quot; box which is custom box created which can be used for setting up the cluster with basic dependencies for kubernetes node.
-2. Set ``` SETUP_MASTER ``` to true if you want to setup the node. This is true by default for spawning a new cluster. You can skip it for adding new minions.
-3. Set ``` SETUP_NODES ``` to true/false depending on whether you are setting up minions in the cluster.
-4. Specify ``` NODE_COUNT ``` as the count of minions in the cluster
-5. Specify  the ``` MASTER_IP ``` as static IP which can be referenced for other cluster configurations
-6. Specify ``` NODE_IP_NW ``` as the network IP which can be used for assigning dynamic IPs for cluster nodes from the same network as Master
-7. Specify custom ``` POD_NW_CIDR ``` of your choice
-8. Setting up kubernetes dashboard is still a WIP with ``` K8S_DASHBOARD ``` option.
+vagrant ssh master
+sudo -i
+chown vagrant /etc/kubernetes/admin.conf
+exit
+exit
+scp -P 22 -i $(vagrant ssh-config | grep -m 1 IdentityFile | cut -d ' ' -f 4) vagrant@192.168.26.10:/etc/kubernetes/admin.conf kube.config
+KUBECONFIG=kube.config kubectl get nodes
+
+NAME      STATUS    ROLES     AGE       VERSION
+master    Ready     master    35m       v1.10.0
+node1     Ready     <none>    30m       v1.10.0
+node2     Ready     <none>    28m       v1.10.0
+
+--> Celebrate ;-)
+```
+
