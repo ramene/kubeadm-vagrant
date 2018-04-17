@@ -9,12 +9,24 @@ Installation
 
 - Clone the kubeadm-vagrant repo
 
-```git clone https://github.com/arashkaffamanesh/kubeadm-vagrant ```
+```git clone https://github.com/ramene/kubeadm-vagrant ```
 
 - Choose your distribution of choice from CentOS/Ubuntu and move to the specific directory.
 - Configure the cluster parameters in Vagrantfile. Refer below for details of configuration options.
 
 ``` vi Vagrantfile ```
+
+- Hostmanager may be needed
+
+```sh
+There are errors in the configuration of this machine. Please fix
+the following errors and try again:
+
+Vagrant:
+* Unknown configuration section 'hostmanager'.
+```
+
+``` vagrant plugin install vagrant-hostmanager ```
 
 - Spin up the master
 
