@@ -85,9 +85,9 @@ cp config $HOME/.kube/config
 
 As [outlined in Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444#first-lets-deploy-a-simple-microservice-to-our-local-kubernetes-cluster), let's deploy the [sample microservice](https://github.com/kubernauts/dok-example-us) from [Michael Hausenblas](https://github.com/mhausenblas)
 
-  > Ok, but what else can I do?
+  > _Ok, but what else can I do?_ .
 
-  ``` $ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')```
+  `$ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')`
 
 ### Post Deployment
 
@@ -167,7 +167,7 @@ microservices   service/stock-con       ClusterIP   10.96.210.95     <none>     
 microservices   service/stock-gen       ClusterIP   10.110.152.206   <none>        9999/TCP        49s       app=stock-gen
 ```
 > From the host, you can also run:
-> $ KUBECONFIG=kube.config kubectl get no,po,svc,deployments --all-namespaces -o wide
+> `$ KUBECONFIG=kube.config kubectl get no,po,svc,deployments --all-namespaces -o wide`
 
 Now, let's expose the service outside the cluster
 
