@@ -1,6 +1,11 @@
 ## Running Ethereum and IPFS on K8s with kubeadm-vagrant
 
 > _In [Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444) we discussed how you would effectively **enable** Kubernetes.  Here, in our continued series of working sessions, we outline the manual process for those that prefer to run a X node Kubernetes Cluster locally with Kubeadm Vagrant (with VirtualBox provider)._
+>
+> Don't forget to check out, [kubectl in action](https://github.com/mhausenblas/kubectl-in-action) by [Michael Hausenblas](https://github.com/mhausenblas) - `kubectl` a CLI allowing us to interact with our cluster remotely. It supports operations ranging from configuration to managing workloads and services to handle access control to administrative tasks such as node maintenance.
+
+
+https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
 Part 0
 ---
@@ -9,19 +14,15 @@ Part 0
 
 The following assumptions are made along with some links to help you get started on addressing these assumptions
 
-2. You have a drive-by understanding of Kubernetes [https://kubernauts.slack.com/messages/C71S057S7]
-3. You have a working understanding of Ethereum [https://kubernauts.slack.com/messages/C71S057S7]
-4. You have a basic understanding of machine learning [https://www.coursera.org/learn/machine-learning]
-5. You have a basic understanding of Tensorflow [https://www.youtube.com/watch?v=cKxRvEZd3Mw]
+1. You have a drive-by understanding of Kubernetes [https://kubernauts.slack.com/messages/C71S057S7]
+2. You have a working understanding of Ethereum [https://kubernauts.slack.com/messages/C71S057S7]
+3. You have a basic understanding of machine learning [https://www.coursera.org/learn/machine-learning]
+4. You have a basic understanding of Tensorflow [https://www.youtube.com/watch?v=cKxRvEZd3Mw]
 
 ### Prerequisites
 
-- kubectl
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - virtualbox/vagrant
-
-### kubectl In Action
-
-> Don't forget to check out, [kubectl in action](https://github.com/mhausenblas/kubectl-in-action) by [Michael Hausenblas](https://github.com/mhausenblas) a CLI allowing you to interact with your cluster. It supports operations ranging from configuration to managing workloads and services to handle access control to administrative tasks such as node maintenance.
 
 Installation
 
