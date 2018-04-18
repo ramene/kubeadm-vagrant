@@ -1,6 +1,6 @@
 ## Running Ethereum and IPFS on K8s with kubeadm-vagrant
 
-> _In [Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444) we discussed how you would effectively **enable** Kubernetes.  Here, in our continued series of working sessions, we outline the manual process for those that prefer to run a X node Kubernetes Cluster locally with Kubeadm Vagrant (with VirtualBox provider)._
+> _In [Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444) we laid out how we would effectively **enable** Kubernetes via docker-for-mac, edge release with kubernetes built-in.  Here, in our continued series of working sessions, we outline the manual process for those that prefer to run a X node Kubernetes Cluster locally with Kubeadm Vagrant (with VirtualBox provider)._
 >
 > _Don't forget to check out, [kubectl in action](https://github.com/mhausenblas/kubectl-in-action) by [Michael Hausenblas](https://github.com/mhausenblas) - `kubectl` a CLI allowing us to interact with our cluster remotely. It supports operations ranging from configuration to managing workloads and services to handle access control to administrative tasks such as node maintenance._
 
@@ -146,6 +146,4 @@ kube-system   service/kube-dns        ClusterIP   10.96.0.10       <none>       
 kube-system   service/tiller-deploy   ClusterIP   10.101.156.225   <none>        44134/TCP       18h       app=helm,name=tiller
 ```
 
-
-
-_coming in Part 2, we'll cover using Truffle to compile and migrate our smart contracts to our blockchain._
+_Stay tuned for Part 2, where I'll cover using `helm` to deploy a complete application stack_
