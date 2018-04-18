@@ -89,7 +89,13 @@ Ok, What else can I do?
 $ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')
 ```
 
-### Cluster Networking - Advanced
+### K8s Cluster Networking using NGINX Ingress Controller
+
+By far the more reasonable and scalable solution is to use [NGINX Ingress controller](https://github.com/kubernetes/ingress-nginx/tree/nginx-0.12.0#nginx-ingress-controller) built around Kubernetes [ingress resource](http://kubernetes.io/docs/user-guide/ingress/) to surface as many Services as you wish.
+
+TL;DR - [What's an Ingress Controller?](https://github.com/kubernetes/ingress-nginx/tree/nginx-0.12.0#what-is-an-ingress-controller)
+
+#####, Just show me, I'm a glutton for punishment...
 
 ```sh
 $ sudo iptables -L -n
@@ -112,8 +118,6 @@ ACCEPT     all  --  0.0.0.0/0            10.244.0.0/16        /* kubernetes forw
 Chain KUBE-SERVICES (1 references)
 target     prot opt source               destination
 ```
-
-This [repository](https://github.com/kubernetes/ingress-nginx) By far the more reasonable and scalable solution is to use an [Ingress controller](https://github.com/kubernetes/ingress-nginx/tree/nginx-0.12.0#what-is-an-ingress-controller) to surface as many Services as you wish, using the same nginx virtual-hosting that you are likely already familiar with using.
 
 
 _coming in Part 2, we'll cover using Truffle to compile and migrate our smart contracts to our blockchain._
