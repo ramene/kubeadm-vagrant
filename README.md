@@ -168,10 +168,11 @@ kube-system     service/tiller-deploy   ClusterIP   10.101.156.225   <none>     
 microservices   service/stock-con       ClusterIP   10.96.210.95     <none>        80/TCP          36s       app=stock-con
 microservices   service/stock-gen       ClusterIP   10.110.152.206   <none>        9999/TCP        49s       app=stock-gen
 ```
-> From the host, you can also run:
+> Back on the host, you can also issues any of these commands by, for instance:
+>
 
-```bash
-$ KUBECONFIG=kube.config kubectl get no,po,svc,deployments --all-namespaces -o wide
+```console
+host@macbook-pro:/Users/ramene# KUBECONFIG=kube.config kubectl get no,po,svc,deployments --all-namespaces -o wide
 ```
 
 Now, let's expose the service outside the cluster
@@ -190,7 +191,7 @@ Kubernetes master is running at https://192.168.26.10:6443
 KubeDNS is running at https://192.168.26.10:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 ```
 
-Tear it all down
+Amen.
 
 ```console
 root@master:/home/vagrant# kubectl delete ns microservices
