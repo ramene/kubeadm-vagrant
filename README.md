@@ -175,6 +175,14 @@ root@master:/home/vagrant# kubectl get -n microservices po --selector=app=stock-
         xargs -IPOD kubectl -n microservices port-forward POD 9898:9898
 ```
 
+Let's get our `cluster-info` again for reference sake
+
+```console
+root@master:/home/vagrant# kubectl cluster-info
+Kubernetes master is running at https://192.168.26.10:6443
+KubeDNS is running at https://192.168.26.10:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+```
+
 Tear it all down
 
 ```console
