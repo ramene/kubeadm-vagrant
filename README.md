@@ -39,7 +39,7 @@ Installation
 
 - This will spin up the Kubernetes master. You can check the status of cluster with following command,
 
-```
+```bash
 vagrant ssh master
 sudo su
 kubectl get pods --all-namespaces
@@ -56,7 +56,7 @@ set SETUP_NODES = true in Vagrantfile
 
 - Copy kubeconfig to your host machine
 
-```
+```bash
 vagrant ssh master
 sudo -i
 chown vagrant /etc/kubernetes/admin.conf
@@ -85,7 +85,7 @@ As outlined in [Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc21197
 
 Ok, What else can I do?
 
-```sh
+```console
 $ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')
 ```
 
@@ -95,7 +95,7 @@ By far the more reasonable and scalable solution is to use [NGINX Ingress contro
 
 _**TL;DR:**_ - [What's an Ingress Controller?](https://github.com/kubernetes/ingress-nginx/tree/nginx-0.12.0#what-is-an-ingress-controller)
 
-```sh
+```console
 $ sudo iptables -L -n
 ```
 
@@ -157,4 +157,4 @@ $ kubectl expose deployment webserver --port=80 --target-port=80
 $ kubectl describe svc -l=run=webserver
 ```
 
-_Stay tuned for Part 2, where we'll cover using `helm` to deploy a complete application stack.
+_Stay tuned for Part 2, where we'll cover using `helm` to deploy a complete application stack._
