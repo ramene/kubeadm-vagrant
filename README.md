@@ -112,12 +112,9 @@ target     prot opt source               destination
 ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0            /* kubernetes forwarding rules */ mark match 0x4000/0x4000
 ACCEPT     all  --  10.244.0.0/16        0.0.0.0/0            /* kubernetes forwarding conntrack pod source rule */ ctstate RELATED,ESTABLISHED
 ACCEPT     all  --  0.0.0.0/0            10.244.0.0/16        /* kubernetes forwarding conntrack pod destination rule */ ctstate RELATED,ESTABLISHED
-
-Chain KUBE-SERVICES (1 references)
-target     prot opt source               destination
 ```
 
-A brief tangent
+###### _**Our current landscape might look like...**_
 
 ```console
 root@master:/home/vagrant# kubectl get po,no,svc --all-namespaces -o wide
@@ -146,4 +143,20 @@ kube-system   service/kube-dns        ClusterIP   10.96.0.10       <none>       
 kube-system   service/tiller-deploy   ClusterIP   10.101.156.225   <none>        44134/TCP       18h       app=helm,name=tiller
 ```
 
-_Stay tuned for Part 2, where I'll cover using `helm` to deploy a complete application stack_
+> Following the steps outlined in [Connecting applications to services](https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/), Let's create a new deployment.
+
+As outlined
+```bash
+$ kubectl create -f ./run-my-nginx.yaml
+$ kubectl get pods -l run=my-nginx -o wide
+```
+
+One approach
+
+```bash
+$ kubectl run webserver --image=nginx:1.13 --env="DNS_DOMAIN=cluster" --env="POD_NAMESPACE=default"
+$ kubectl expose deployment webserver --port=80 --target-port=80
+$ kubectl describe svc -l=run=webserver
+```
+
+_Stay tuned for Part 2, where we'll cover using `helm` to deploy a complete application stack.
