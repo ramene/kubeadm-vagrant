@@ -97,6 +97,8 @@ By far the more reasonable scalable and _less agonizingly painful_ solution is t
 
 _**TL;DR:**_ - [What's an Ingress Controller?](https://github.com/kubernetes/ingress-nginx/tree/nginx-0.12.0#what-is-an-ingress-controller)
 
+#### _Get the lay of the land, specific to kubernetes..._
+
 ```console
 root@master:/home/vagrant# sudo iptables -L -n
 
@@ -167,7 +169,10 @@ microservices   service/stock-con       ClusterIP   10.96.210.95     <none>     
 microservices   service/stock-gen       ClusterIP   10.110.152.206   <none>        9999/TCP        49s       app=stock-gen
 ```
 > From the host, you can also run:
-> `$ KUBECONFIG=kube.config kubectl get no,po,svc,deployments --all-namespaces -o wide`
+
+```bash
+$ KUBECONFIG=kube.config kubectl get no,po,svc,deployments --all-namespaces -o wide
+```
 
 Now, let's expose the service outside the cluster
 
