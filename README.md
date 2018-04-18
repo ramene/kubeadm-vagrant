@@ -12,10 +12,8 @@ Part 0.1
 
 The following assumptions are made along with some links to help you get started on addressing these assumptions
 
-1. You have a drive-by understanding of Kubernetes [https://kubernauts.slack.com/messages/C71S057S7]
+1. You have a working understanding of virtualbox, vagrant and other hypervisors 
 2. You have a working understanding of Ethereum [https://kubernauts.slack.com/messages/C71S057S7]
-3. You have a basic understanding of machine learning [https://www.coursera.org/learn/machine-learning]
-4. You have a basic understanding of Tensorflow [https://www.youtube.com/watch?v=cKxRvEZd3Mw]
 
 ### Prerequisites
 
