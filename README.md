@@ -45,7 +45,9 @@ sudo su
 kubectl get pods --all-namespaces
 kubeadm token create
 148a37.736fd53655b767b7
---> we need to set this token for KUBETOKEN in our Vagrantfile
+exit
+exit
+--> we need to set our KUBETOKEN in our Vagrantfile
 ```
 
 - Spin up the nodes
@@ -79,23 +81,24 @@ cp $HOME/.kube/config $HOME/.kube/config_backup
 cp config $HOME/.kube/config
 
 
-### Everything look good?
+## Good, You're still here...
 
 As outlined in [Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444#first-lets-deploy-a-simple-microservice-to-our-local-kubernetes-cluster), let's deploy the [sample microservice](https://github.com/kubernauts/dok-example-us) from [Michael Hausenblas](https://github.com/mhausenblas)
 
-Ok, What else can I do?
+  > Ok, but what else can I do?
 
-```console
-$ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')
-```
+  ```
+  $ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n
+  $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')
+  ```
 
-### K8s Cluster Networking using NGINX Ingress Controller
+### Post Deployment
 
-By far the more reasonable and scalable solution is to use [NGINX Ingress controller](https://github.com/kubernetes/ingress-nginx/tree/nginx-0.12.0#nginx-ingress-controller) built around Kubernetes [ingress resource](http://kubernetes.io/docs/user-guide/ingress/) to surface as many Services as you wish.
+#### _K8s Cluster Networking_
+
+By far the more reasonable scalable and _less agonizingly painful_ solution is to use [NGINX Ingress controller](https://github.com/kubernetes/ingress-nginx/tree/nginx-0.12.0#nginx-ingress-controller) built around Kubernetes [ingress resource](http://kubernetes.io/docs/user-guide/ingress/) to surface as many Services as you wish.
 
 _**TL;DR:**_ - [What's an Ingress Controller?](https://github.com/kubernetes/ingress-nginx/tree/nginx-0.12.0#what-is-an-ingress-controller)
-
-###### _take a look at iptables on our master node..._
 
 ```console
 root@master:/home/vagrant# sudo iptables -L -n
@@ -115,7 +118,7 @@ ACCEPT     all  --  10.244.0.0/16        0.0.0.0/0            /* kubernetes forw
 ACCEPT     all  --  0.0.0.0/0            10.244.0.0/16        /* kubernetes forwarding conntrack pod destination rule */ ctstate RELATED,ESTABLISHED
 ```
 
-###### _Our current landscape might look like..._
+#### _Our current landscape might look like..._
 
 ```console
 root@master:/home/vagrant# kubectl get po,no,svc --all-namespaces -o wide
@@ -144,7 +147,7 @@ kube-system   service/kube-dns        ClusterIP   10.96.0.10       <none>       
 kube-system   service/tiller-deploy   ClusterIP   10.101.156.225   <none>        44134/TCP       18h       app=helm,name=tiller
 ```
 
-###### _Hands-On..Let's go..._
+#### _Let's go..._
 ```console
 $ kubectl create -f https://gist.githubusercontent.com/ramene/0f989e545eb44a80fe03c3a9f04829c9/raw/30d05fc6379f44ab56557a3f81683cf0441a644a/run-my-nginx.yml
 $ kubectl get pods -l run=my-nginx -o wide
@@ -156,4 +159,4 @@ $ kubectl expose deployment webserver --port=80 --target-port=80
 $ kubectl describe svc -l=run=webserver
 ```
 
-_Coming in Part 2, where go over using `helm` to deploy a application stacks and build pipeline in building DApps._
+_Coming in Part 2, where go over using `helm` to deploy a application stacks and build pipeline in **building DApps**._
