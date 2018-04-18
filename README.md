@@ -2,10 +2,8 @@
 
 > _In [Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444) we discussed how you would effectively **enable** Kubernetes.  Here, in our continued series of working sessions, we outline the manual process for those that prefer to run a X node Kubernetes Cluster locally with Kubeadm Vagrant (with VirtualBox provider)._
 >
-> Don't forget to check out, [kubectl in action](https://github.com/mhausenblas/kubectl-in-action) by [Michael Hausenblas](https://github.com/mhausenblas) - `kubectl` a CLI allowing us to interact with our cluster remotely. It supports operations ranging from configuration to managing workloads and services to handle access control to administrative tasks such as node maintenance.
+> _Don't forget to check out, [kubectl in action](https://github.com/mhausenblas/kubectl-in-action) by [Michael Hausenblas](https://github.com/mhausenblas) - `kubectl` a CLI allowing us to interact with our cluster remotely. It supports operations ranging from configuration to managing workloads and services to handle access control to administrative tasks such as node maintenance._
 
-
-https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
 Part 0
 ---
