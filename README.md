@@ -1,13 +1,27 @@
-# kubeadm-vagrant
-Setup Kubernetes Cluster with Kubeadm and Vagrant
+# Running Ethereum and IPFS on K8s with kubeadm-vagrant
 
-Introduction
+> _In [Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444) we discussed how you would effectively **enable** Kubernetes.  Here, in our continued series of working sessions, we outline the manual process for those that prefer to run a X node Kubernetes Cluster locally with Kubeadm Vagrant (with VirtualBox provider).
 
-With reference to steps listed at [Using kubeadm to Create a Cluster](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/) for setting up the Kubernetes cluster with kubeadm.  Here I make every attemp outlining simple steps to setup your kubernetes cluster with more control on vagrant based virtual machines.
+Part 0
+---
+
+> _The steps outlined are designed for Mac/Linux based CLI/Shell._
+
+The following assumptions are made along with some links to help you get started on addressing these assumptions
+
+2. You have a drive-by understanding of Kubernetes [https://kubernauts.slack.com/messages/C71S057S7]
+3. You have a working understanding of Ethereum [https://kubernauts.slack.com/messages/C71S057S7]
+4. You have a basic understanding of machine learning [https://www.coursera.org/learn/machine-learning]
+5. You have a basic understanding of Tensorflow [https://www.youtube.com/watch?v=cKxRvEZd3Mw]
+
+### Prerequisites
+
+- kubectl
+- virtualbox/vagrant
 
 ### kubectl In Action
 
-> Kubernetes comes with `kubectl`, a CLI allowing you to interact with your cluster. It supports operations ranging from configuration to managing workloads and services to handle access control to administrative tasks such as node maintenance. In this talk you'll learn everything you need to know getting the most out of `kubectl` (and beyond).
+> Don't forget to check out, [kubectl in action](https://github.com/mhausenblas/kubectl-in-action) by [Michael Hausenblas](https://github.com/mhausenblas) a CLI allowing you to interact with your cluster. It supports operations ranging from configuration to managing workloads and services to handle access control to administrative tasks such as node maintenance.
 
 Installation
 
@@ -70,7 +84,7 @@ node1     Ready     <none>    30m       v1.10.0
 node2     Ready     <none>    28m       v1.10.0
 
 --> Celebrate ;-)
-
+```
 
 Got some usage examples?
 
@@ -78,7 +92,7 @@ Got some usage examples?
 $ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')
 ```
 
-Alternatively, if you'd like to merge your kube.config with ~/.kube/config do the folowing:
+> Alternatively, if you'd like to merge your kube.config with ~/.kube/config do the folowing:
 KUBECONFIG=~/.kube/config:./kube.config kubectl config view --flatten --> config
 cp ~/.kube/config ~/.kube/config_backup
 cp config ~/.kube/config
