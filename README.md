@@ -21,6 +21,7 @@ The following assumptions are made along with some links to help you get started
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - virtualbox/vagrant
+- vagrant-hostmanager ( `vagrant plugin install vagrant-hostmanager` )
 
 Installation
 
@@ -66,7 +67,7 @@ set SETUP_NODES = true in Vagrantfile
 
 ``` vagrant up ```
 
-- Copy kubeconfig to your machine
+- Copy kubeconfig to your host machine
 
 ```
 vagrant ssh master
@@ -85,13 +86,24 @@ node2     Ready     <none>    28m       v1.10.0
 --> Celebrate ;-)
 ```
 
+> Alternatively, if you'd like to merge your kube.config with ~/.kube/config do the folowing:
+KUBECONFIG=~/.kube/config:./kube.config kubectl config view --flatten --> config
+cp ~/.kube/config ~/.kube/config_backup
+cp config ~/.kube/config
+
+
 Got some usage examples?
 
 ```
 $ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')
 ```
 
-> Alternatively, if you'd like to merge your kube.config with ~/.kube/config do the folowing:
-KUBECONFIG=~/.kube/config:./kube.config kubectl config view --flatten --> config
-cp ~/.kube/config ~/.kube/config_backup
-cp config ~/.kube/config
+### Deploy Ethereum and IPFS Charts with Helm
+
+_....hold one, I think I fucking broke it again!_
+
+### Cluster Networking - Advanced
+  
+  ```
+  $ sudo iptables -L -n
+  ```
