@@ -83,7 +83,7 @@ cp config $HOME/.kube/config
 
 ## Good, You're still here...
 
-As outlined in [Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444#first-lets-deploy-a-simple-microservice-to-our-local-kubernetes-cluster), let's deploy the [sample microservice](https://github.com/kubernauts/dok-example-us) from [Michael Hausenblas](https://github.com/mhausenblas)
+As [outlined in Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444#first-lets-deploy-a-simple-microservice-to-our-local-kubernetes-cluster), let's deploy the [sample microservice](https://github.com/kubernauts/dok-example-us) from [Michael Hausenblas](https://github.com/mhausenblas)
 
   > Ok, but what else can I do?
 
@@ -145,10 +145,28 @@ kube-system   service/tiller-deploy   ClusterIP   10.101.156.225   <none>       
 ```
 
 #### _Bottom Line_
+
 ```console
-$ kubectl create -f https://gist.githubusercontent.com/ramene/0f989e545eb44a80fe03c3a9f04829c9/raw/30d05fc6379f44ab56557a3f81683cf0441a644a/run-my-nginx.yml
-$ kubectl get pods -l run=my-nginx -o wide
+$ kubectl create namespace microservices
+$ kubectl -n=microservices apply -f https://raw.githubusercontent.com/kubernauts/dok-example-us/master/stock-gen/app.yaml 
+$ kubectl -n=microservices apply -f https://raw.githubusercontent.com/kubernauts/dok-example-us/master/stock-con/app.yaml
 ```
+
+Let's see our new pods and services
+```console
+root@master:/home/vagrant# kubectl get po,svc --all-namespaces -o wide
+NAMESPACE       NAME                                 READY     STATUS              RESTARTS   AGE       IP              NODE
+microservices   pod/stock-con-89984446c-qv2wc        0/1       ContainerCreating   0          36s       <none>          node1
+microservices   pod/stock-gen-6ff64f77cd-7bbsb       0/1       ContainerCreating   0          49s       <none>          node2
+
+NAMESPACE       NAME                    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE       SELECTOR
+default         service/kubernetes      ClusterIP   10.96.0.1        <none>        443/TCP         20h       <none>
+kube-system     service/kube-dns        ClusterIP   10.96.0.10       <none>        53/UDP,53/TCP   20h       k8s-app=kube-dns
+kube-system     service/tiller-deploy   ClusterIP   10.101.156.225   <none>        44134/TCP       20h       app=helm,name=tiller
+microservices   service/stock-con       ClusterIP   10.96.210.95     <none>        80/TCP          36s       app=stock-con
+microservices   service/stock-gen       ClusterIP   10.110.152.206   <none>        9999/TCP        49s       app=stock-gen
+```
+
 
 ```console
 $ kubectl run webserver --image=nginx:1.13 --env="DNS_DOMAIN=cluster" --env="POD_NAMESPACE=default"
