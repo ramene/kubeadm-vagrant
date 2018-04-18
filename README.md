@@ -166,8 +166,10 @@ kube-system     service/tiller-deploy   ClusterIP   10.101.156.225   <none>     
 microservices   service/stock-con       ClusterIP   10.96.210.95     <none>        80/TCP          36s       app=stock-con
 microservices   service/stock-gen       ClusterIP   10.110.152.206   <none>        9999/TCP        49s       app=stock-gen
 ```
+> From the host, you can also run:
+> $ KUBECONFIG=kube.config kubectl get no,po,svc,deployments --all-namespaces -o wide
 
-Now, expose the service outside the cluster
+Now, let's expose the service outside the cluster
 
 ```console
 root@master:/home/vagrant# kubectl get -n microservices po --selector=app=stock-con \
@@ -189,4 +191,4 @@ Tear it all down
 root@master:/home/vagrant# kubectl delete ns microservices
 ```
 
-_Coming in Part 2, where go over using `helm` to deploy a application stacks and build pipeline in **building DApps**._
+_In Part 2, we'll go over using `helm` to deploy complete application stacks and build pipelines., using our cluster._
