@@ -35,18 +35,6 @@ Installation
 
 ``` vi Vagrantfile ```
 
-- Hostmanager may be needed
-
-```sh
-There are errors in the configuration of this machine. Please fix
-the following errors and try again:
-
-Vagrant:
-* Unknown configuration section 'hostmanager'.
-```
-
-``` vagrant plugin install vagrant-hostmanager ```
-
 - Spin up the master
 
 ``` vagrant up ```
@@ -92,16 +80,14 @@ KUBECONFIG=$HOME/.kube/config:./kube.config kubectl config view --flatten --> co
 cp $HOME/.kube/config $HOME/.kube/config_backup
 cp config $HOME/.kube/config
 
-
 Got some usage examples?
 
-```
+```sh
 $ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')
 ```
 
-### Deploy Ethereum and IPFS Charts with Helm
-
-_....hold one, I think I fucking broke it again!_
+### Validating the Cluster
+_see: **First, Let's deploy a simple microservice to our local kubernetes cluster**(https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444#first-lets-deploy-a-simple-microservice-to-our-local-kubernetes-cluster)_
 
 ### Cluster Networking - Advanced
   
