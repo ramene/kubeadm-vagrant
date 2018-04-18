@@ -95,13 +95,12 @@ By far the more reasonable and scalable solution is to use [NGINX Ingress contro
 
 _**TL;DR:**_ - [What's an Ingress Controller?](https://github.com/kubernetes/ingress-nginx/tree/nginx-0.12.0#what-is-an-ingress-controller)
 
-```console
-$ sudo iptables -L -n
-```
-
 ###### _take a look at iptables on our master node..._
 
 ```console
+root@master:/home/vagrant# sudo iptables -L -n
+
+...
 Chain KUBE-EXTERNAL-SERVICES (1 references)
 target     prot opt source               destination
 
@@ -146,15 +145,15 @@ kube-system   service/tiller-deploy   ClusterIP   10.101.156.225   <none>       
 ```
 
 ###### _Hands-On..Let's go..._
-```bash
+```console
 $ kubectl create -f https://gist.githubusercontent.com/ramene/0f989e545eb44a80fe03c3a9f04829c9/raw/30d05fc6379f44ab56557a3f81683cf0441a644a/run-my-nginx.yml
 $ kubectl get pods -l run=my-nginx -o wide
 ```
 
-```bash
+```console
 $ kubectl run webserver --image=nginx:1.13 --env="DNS_DOMAIN=cluster" --env="POD_NAMESPACE=default"
 $ kubectl expose deployment webserver --port=80 --target-port=80
 $ kubectl describe svc -l=run=webserver
 ```
 
-_Stay tuned for Part 2, where we'll cover using `helm` to deploy a complete application stack._
+_Coming in Part 2, where go over using `helm` to deploy a application stacks and build pipeline in building DApps._
