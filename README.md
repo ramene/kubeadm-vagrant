@@ -93,11 +93,13 @@ $ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Exa
 
 By far the more reasonable and scalable solution is to use [NGINX Ingress controller](https://github.com/kubernetes/ingress-nginx/tree/nginx-0.12.0#nginx-ingress-controller) built around Kubernetes [ingress resource](http://kubernetes.io/docs/user-guide/ingress/) to surface as many Services as you wish.
 
-TL;DR - [What's an Ingress Controller?](https://github.com/kubernetes/ingress-nginx/tree/nginx-0.12.0#what-is-an-ingress-controller)
+_**TL;DR:**_ - [What's an Ingress Controller?](https://github.com/kubernetes/ingress-nginx/tree/nginx-0.12.0#what-is-an-ingress-controller)
 
 ```sh
 $ sudo iptables -L -n
 ```
+
+###### _take a look at iptables on our master node..._
 
 ```console
 Chain KUBE-EXTERNAL-SERVICES (1 references)
@@ -114,7 +116,7 @@ ACCEPT     all  --  10.244.0.0/16        0.0.0.0/0            /* kubernetes forw
 ACCEPT     all  --  0.0.0.0/0            10.244.0.0/16        /* kubernetes forwarding conntrack pod destination rule */ ctstate RELATED,ESTABLISHED
 ```
 
-###### _**Our current landscape might look like...**_
+###### _Our current landscape might look like..._
 
 ```console
 root@master:/home/vagrant# kubectl get po,no,svc --all-namespaces -o wide
@@ -143,15 +145,11 @@ kube-system   service/kube-dns        ClusterIP   10.96.0.10       <none>       
 kube-system   service/tiller-deploy   ClusterIP   10.101.156.225   <none>        44134/TCP       18h       app=helm,name=tiller
 ```
 
-> Following the steps outlined in [Connecting applications to services](https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/), Let's create a new deployment.
-
-As outlined
+###### _Hands-On..Let's go..._
 ```bash
-$ kubectl create -f ./run-my-nginx.yaml
+$ kubectl create -f https://gist.githubusercontent.com/ramene/0f989e545eb44a80fe03c3a9f04829c9/raw/30d05fc6379f44ab56557a3f81683cf0441a644a/run-my-nginx.yml
 $ kubectl get pods -l run=my-nginx -o wide
 ```
-
-One approach
 
 ```bash
 $ kubectl run webserver --image=nginx:1.13 --env="DNS_DOMAIN=cluster" --env="POD_NAMESPACE=default"
