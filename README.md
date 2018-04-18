@@ -143,7 +143,7 @@ kube-system   service/kube-dns        ClusterIP   10.96.0.10       <none>       
 kube-system   service/tiller-deploy   ClusterIP   10.101.156.225   <none>        44134/TCP       18h       app=helm,name=tiller
 ```
 
-#### _Bottom Line_
+### Part 0.3 - Leveraging Kubernetes and Cloud Native Microservices
 :raised_hands: Also, [Learn more about Imperative vs Declarative deployments](https://medium.com/bitnami-perspectives/imperative-declarative-and-a-few-kubectl-tricks-9d6deabdde)
 
 ```console
