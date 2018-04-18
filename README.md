@@ -3,7 +3,11 @@ Setup Kubernetes Cluster with Kubeadm and Vagrant
 
 Introduction
 
-With reference to steps listed at [Using kubeadm to Create a Cluster](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/) for setting up the Kubernetes cluster with kubeadm. I have been working on an automation to setup the cluster. The result of it is [kubeadm-vagrant](https://github.com/coolsvap/kubeadm-vagrant), a github project with simple steps to setup your kubernetes cluster with more control on vagrant based virtual machines.
+With reference to steps listed at [Using kubeadm to Create a Cluster](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/) for setting up the Kubernetes cluster with kubeadm.  Here I make every attemp outlining simple steps to setup your kubernetes cluster with more control on vagrant based virtual machines.
+
+### kubectl In Action
+
+> Kubernetes comes with `kubectl`, a CLI allowing you to interact with your cluster. It supports operations ranging from configuration to managing workloads and services to handle access control to administrative tasks such as node maintenance. In this talk you'll learn everything you need to know getting the most out of `kubectl` (and beyond).
 
 Installation
 
@@ -67,18 +71,14 @@ node2     Ready     <none>    28m       v1.10.0
 
 --> Celebrate ;-)
 
-N.B.: if you'd like to merge your kube.config with ~/.kube/config do the folowing:
+
+Got some usage examples?
+
+```
+$ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')
+```
+
+Alternatively, if you'd like to merge your kube.config with ~/.kube/config do the folowing:
 KUBECONFIG=~/.kube/config:./kube.config kubectl config view --flatten --> config
 cp ~/.kube/config ~/.kube/config_backup
 cp config ~/.kube/config
-
-```
-1. ``` BOX_IMAGE ``` is currently default with &quot;coolsvap/centos-k8s&quot; box which is custom box created which can be used for setting up the cluster with basic dependencies for kubernetes node.
-2. Set ``` SETUP_MASTER ``` to true if you want to setup the node. This is true by default for spawning a new cluster. You can skip it for adding new minions.
-3. Set ``` SETUP_NODES ``` to false by the first run, after the master is created and you run ```kubeadm token create``` on master an update your vagrantfile with the token, then you need to set ``` SETUP_NODES ``` to true.
-4. Specify ``` NODE_COUNT ``` as the count of minions in the cluster
-5. Specify  the ``` MASTER_IP ``` as static IP which can be referenced for other cluster configurations
-6. Specify ``` NODE_IP_NW ``` as the network IP which can be used for assigning dynamic IPs for cluster nodes from the same network as Master
-7. Specify custom ``` POD_NW_CIDR ``` of your choice
-8. Setting up kubernetes dashboard is still a WIP with ``` K8S_DASHBOARD ``` option.
-```
