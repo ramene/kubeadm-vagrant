@@ -85,9 +85,7 @@ Got some usage examples?
 ```sh
 $ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')
 ```
-
-### Validating the Cluster
-_see: **[First, Let's deploy a simple microservice to our local kubernetes cluster]**(https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444#first-lets-deploy-a-simple-microservice-to-our-local-kubernetes-cluster)_
+_[Let's deploy a simple microservice to our local kubernetes cluster](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444#first-lets-deploy-a-simple-microservice-to-our-local-kubernetes-cluster)_
 
 ### Cluster Networking - Advanced
   
