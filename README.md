@@ -87,10 +87,7 @@ As outlined in [Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc21197
 
   > Ok, but what else can I do?
 
-  ```
-  $ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n
-  $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')
-  ```
+  ``` $ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')```
 
 ### Post Deployment
 
@@ -147,7 +144,7 @@ kube-system   service/kube-dns        ClusterIP   10.96.0.10       <none>       
 kube-system   service/tiller-deploy   ClusterIP   10.101.156.225   <none>        44134/TCP       18h       app=helm,name=tiller
 ```
 
-#### _Let's go..._
+#### _Bottom Line_
 ```console
 $ kubectl create -f https://gist.githubusercontent.com/ramene/0f989e545eb44a80fe03c3a9f04829c9/raw/30d05fc6379f44ab56557a3f81683cf0441a644a/run-my-nginx.yml
 $ kubectl get pods -l run=my-nginx -o wide
