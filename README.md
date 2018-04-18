@@ -81,15 +81,13 @@ cp $HOME/.kube/config $HOME/.kube/config_backup
 cp config $HOME/.kube/config
 
 
-## Good, You're still here...
+### Part 0.2 - Post Deployment
 
 As [outlined in Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444#first-lets-deploy-a-simple-microservice-to-our-local-kubernetes-cluster), let's deploy the [sample microservice](https://github.com/kubernauts/dok-example-us) from [Michael Hausenblas](https://github.com/mhausenblas)
 
   > _Ok, but what else can I do?_ .
 
   `$ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')`
-
-### Post Deployment
 
 #### _K8s Cluster Networking_
 
@@ -101,7 +99,6 @@ _**TL;DR:**_ - [What's an Ingress Controller?](https://github.com/kubernetes/ing
 
 ```console
 root@master:/home/vagrant# sudo iptables -L -n
-
 ...
 Chain KUBE-EXTERNAL-SERVICES (1 references)
 target     prot opt source               destination
@@ -147,6 +144,7 @@ kube-system   service/tiller-deploy   ClusterIP   10.101.156.225   <none>       
 ```
 
 #### _Bottom Line_
+:raised_hands: Also, [Learn more about Imperative vs Declarative deployments](https://medium.com/bitnami-perspectives/imperative-declarative-and-a-few-kubectl-tricks-9d6deabdde)
 
 ```console
 $ kubectl create namespace microservices
