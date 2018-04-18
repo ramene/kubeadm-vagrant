@@ -5,7 +5,7 @@
 > _Don't forget to check out, [kubectl in action](https://github.com/mhausenblas/kubectl-in-action) by [Michael Hausenblas](https://github.com/mhausenblas) - `kubectl` a CLI allowing us to interact with our cluster remotely. It supports operations ranging from configuration to managing workloads and services to handle access control to administrative tasks such as node maintenance._
 
 
-Part 0
+Part 0.1
 ---
 
 > _The steps outlined are designed for Mac/Linux based CLI/Shell._
@@ -20,7 +20,8 @@ The following assumptions are made along with some links to help you get started
 ### Prerequisites
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- virtualbox/vagrant
+- [virtualbox](https://www.virtualbox.org/wiki/Downloads) 
+- [vagrant](https://www.vagrantup.com/downloads.html)
 - vagrant-hostmanager ( `vagrant plugin install vagrant-hostmanager` )
 
 Installation
@@ -86,10 +87,10 @@ node2     Ready     <none>    28m       v1.10.0
 --> Celebrate ;-)
 ```
 
-> Alternatively, if you'd like to merge your kube.config with ~/.kube/config do the folowing:
-KUBECONFIG=~/.kube/config:./kube.config kubectl config view --flatten --> config
-cp ~/.kube/config ~/.kube/config_backup
-cp config ~/.kube/config
+> Alternatively, if you'd like to merge your kube.config with $HOME/.kube/config do the folowing:
+KUBECONFIG=$HOME/.kube/config:./kube.config kubectl config view --flatten --> config
+cp $HOME/.kube/config $HOME/.kube/config_backup
+cp config $HOME/.kube/config
 
 
 Got some usage examples?
@@ -107,3 +108,5 @@ _....hold one, I think I fucking broke it again!_
   ```
   $ sudo iptables -L -n
   ```
+
+_coming in Part 2, we'll cover using Truffle to compile and migrate our smart contracts to our blockchain._
