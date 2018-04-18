@@ -152,7 +152,7 @@ $ kubectl -n=microservices apply -f https://raw.githubusercontent.com/kubernauts
 $ kubectl -n=microservices apply -f https://raw.githubusercontent.com/kubernauts/dok-example-us/master/stock-con/app.yaml
 ```
 
-Let's see our new pods and services
+After deployment, Let's see where we are...
 ```console
 root@master:/home/vagrant# kubectl get po,svc --all-namespaces -o wide
 NAMESPACE       NAME                                 READY     STATUS              RESTARTS   AGE       IP              NODE
@@ -167,11 +167,18 @@ microservices   service/stock-con       ClusterIP   10.96.210.95     <none>     
 microservices   service/stock-gen       ClusterIP   10.110.152.206   <none>        9999/TCP        49s       app=stock-gen
 ```
 
+Now, expose the service outside the cluster
 
 ```console
-$ kubectl run webserver --image=nginx:1.13 --env="DNS_DOMAIN=cluster" --env="POD_NAMESPACE=default"
-$ kubectl expose deployment webserver --port=80 --target-port=80
-$ kubectl describe svc -l=run=webserver
+root@master:/home/vagrant# kubectl get -n microservices po --selector=app=stock-con \
+        -o=custom-columns=:metadata.name --no-headers | \
+        xargs -IPOD kubectl -n microservices port-forward POD 9898:9898
+```
+
+Tear it all down
+
+```console
+root@master:/home/vagrant# kubectl delete ns microservices
 ```
 
 _Coming in Part 2, where go over using `helm` to deploy a application stacks and build pipeline in **building DApps**._
