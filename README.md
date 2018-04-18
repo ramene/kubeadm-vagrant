@@ -83,14 +83,13 @@ cp config $HOME/.kube/config
 
 ### Looks good
 
-Got some usage examples?
+As outlined during in [Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444#first-lets-deploy-a-simple-microservice-to-our-local-kubernetes-cluster), let's deploy the [sample microservice](https://github.com/kubernauts/dok-example-us) from [Michael Hausenblas](https://github.com/mhausenblas)
+
+What else can I do?
 
 ```sh
 $ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')
 ```
-
-As outlined during in [Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444#first-lets-deploy-a-simple-microservice-to-our-local-kubernetes-cluster), let's deploy the [sample microservice](https://github.com/kubernauts/dok-example-us) from [Michael Hausenblas](https://github.com/mhausenblas)
-
 
 ### Cluster Networking - Advanced
   
