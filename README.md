@@ -52,7 +52,7 @@ kubeadm token create
 
 ```console
 SETUP_NODES = true
----> KUBETOKEN = "<new token>"
+KUBETOKEN = "<new token>"
 ```
 
 ``` vagrant up ```
