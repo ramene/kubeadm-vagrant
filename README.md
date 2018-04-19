@@ -37,7 +37,7 @@ Installation
 
 ``` vagrant up ```
 
-- This will spin up the Kubernetes master. You can check the status of cluster with following command,
+> This will spin up the Kubernetes master. You can check the status of cluster with following command,
 
 ```bash
 vagrant ssh master
@@ -52,6 +52,7 @@ kubeadm token create
 
 ```console
 SETUP_NODES = true
+---> KUBETOKEN = "<new token>"
 ```
 
 ``` vagrant up ```
