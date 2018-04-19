@@ -75,11 +75,13 @@ node2     Ready     <none>    28m       v1.10.0
 --> Celebrate ;-)
 ```
 
-> Alternatively, if you'd like to merge your kube.config with $HOME/.kube/config do the folowing:
-KUBECONFIG=$HOME/.kube/config:./kube.config kubectl config view --flatten --> config
-cp $HOME/.kube/config $HOME/.kube/config_backup
-cp config $HOME/.kube/config
+> _Alternatively, if you'd like to merge your kube.config with $HOME/.kube/config, run the following_
 
+```console
+$ KUBECONFIG=$HOME/.kube/config:./kube.config kubectl config view --flatten --> config
+$ cp $HOME/.kube/config $HOME/.kube/config_backup
+$ cp config $HOME/.kube/config
+```
 
 ### Part 0.2 - Post Deployment
 
