@@ -10,7 +10,7 @@ Part 0.1
 
 > _The steps outlined are designed for Mac/Linux based CLI/Shell._
 
-The following assumptions are made along with some links to help you get started on addressing these assumptions
+The following assumptions are made
 
 1. You have a working understanding of virtualbox, vagrant and/or similar hypervisors 
 2. You have a general understanding of Ethereum and Developing application on the blockchain
@@ -85,7 +85,7 @@ $ cp config $HOME/.kube/config
 
 ### Part 0.2 - Post Deployment
 
-As [outlined in Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444#first-lets-deploy-a-simple-microservice-to-our-local-kubernetes-cluster), let's deploy the same example [cloud native microservice](https://github.com/kubernauts/dok-example-us) from [Michael Hausenblas](https://github.com/mhausenblas)
+As [outlined in Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444#part-1---leveraging-kubernetes-and-cloud-native-microservices), let's deploy the same example [cloud native microservice](https://github.com/kubernauts/dok-example-us) from [Michael Hausenblas](https://github.com/mhausenblas)
 
 > _Want to see more?, run the following either on the `master` node or on the host_ .
 
