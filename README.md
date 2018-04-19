@@ -83,15 +83,15 @@ cp config $HOME/.kube/config
 
 ### Part 0.2 - Post Deployment
 
-As [outlined in Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444#first-lets-deploy-a-simple-microservice-to-our-local-kubernetes-cluster), let's deploy the [sample microservice](https://github.com/kubernauts/dok-example-us) from [Michael Hausenblas](https://github.com/mhausenblas)
+As [outlined in Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444#first-lets-deploy-a-simple-microservice-to-our-local-kubernetes-cluster), let's deploy the sample [cloud native microservice](https://github.com/kubernauts/dok-example-us) from [Michael Hausenblas](https://github.com/mhausenblas)
 
-  > _Ok, but what else can I do?_ .
+  > _Want to see more?, run the following either on the `master` node or on the host_ .
 
   `$ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')`
 
-#### _K8s Cluster Networking_
+#### _Kubernetes Cluster Networking_
 
-By far the more reasonable scalable and _less agonizingly painful_ solution is to use [NGINX Ingress controller](https://github.com/kubernetes/ingress-nginx/tree/nginx-0.12.0#nginx-ingress-controller) built around Kubernetes [ingress resource](http://kubernetes.io/docs/user-guide/ingress/) to surface as many Services as you wish.
+By far the more reasonable scalable and _less agonizingly painful_ solution is to use [NGINX Ingress controller](https://github.com/kubernetes/ingress-nginx/tree/nginx-0.12.0#nginx-ingress-controller) built around Kubernetes [ingress resource](http://kubernetes.io/docs/user-guide/ingress/) to surface as many services as you wish.
 
 _**TL;DR:**_ - [What's an Ingress Controller?](https://github.com/kubernetes/ingress-nginx/tree/nginx-0.12.0#what-is-an-ingress-controller)
 
