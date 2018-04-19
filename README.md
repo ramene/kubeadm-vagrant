@@ -1,6 +1,6 @@
-## Running Ethereum and IPFS on K8s with kubeadm-vagrant
+## Running Ethereum and IPFS on K8s with kubeadm-vagrant and helm
 
-> _In [Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444) we laid out how we would effectively **enable** Kubernetes via docker-for-mac, edge release with kubernetes built-in.  Here, in our continued series of working sessions, we outline the manual process for those that prefer to run a X node Kubernetes Cluster locally with Kubeadm Vagrant (with VirtualBox provider)._
+> _In [Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444) we laid out how we would effectively **enable** Kubernetes via docker-for-mac, edge release with kubernetes built-in.  Here, I outline the manual process for those that prefer to run a X node kubernetes cluster locally with kubeadm+vagrant, also including Helm._
 >
 > _Don't forget to check out, [kubectl in action](https://github.com/mhausenblas/kubectl-in-action) by [Michael Hausenblas](https://github.com/mhausenblas) - `kubectl` a CLI allowing us to interact with our cluster remotely. It supports operations ranging from configuration to managing workloads and services to handle access control to administrative tasks such as node maintenance._
 
@@ -43,22 +43,22 @@ Installation
 vagrant ssh master
 sudo su
 kubectl get pods --all-namespaces
+helm init
 kubeadm token create
-148a37.736fd53655b767b7
-exit
-exit
---> we need to set our KUBETOKEN in our Vagrantfile
+148a37.736fd53655b767b7   # KUBETOKEN
 ```
 
-- Spin up the nodes
+> Let's modify our Vagrantfile once again, taking note of the token created in the previous step
 
-set SETUP_NODES = true in Vagrantfile
+```console
+SETUP_NODES = true
+```
 
 ``` vagrant up ```
 
-- Copy kubeconfig to your host machine
+> Copy kubeconfig to your host machine
 
-```bash
+```console
 vagrant ssh master
 sudo -i
 chown vagrant /etc/kubernetes/admin.conf
@@ -71,8 +71,6 @@ NAME      STATUS    ROLES     AGE       VERSION
 master    Ready     master    35m       v1.10.0
 node1     Ready     <none>    30m       v1.10.0
 node2     Ready     <none>    28m       v1.10.0
-
---> Celebrate ;-)
 ```
 
 > _Alternatively, if you'd like to merge your kube.config with $HOME/.kube/config, run the following_
