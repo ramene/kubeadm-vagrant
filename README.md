@@ -102,9 +102,6 @@ _**TL;DR:**_ - [What's an Ingress Controller?](https://github.com/kubernetes/ing
 ```console
 root@master:/home/vagrant# sudo iptables -L -n
 ...
-Chain KUBE-EXTERNAL-SERVICES (1 references)
-target     prot opt source               destination
-
 Chain KUBE-FIREWALL (2 references)
 target     prot opt source               destination
 DROP       all  --  0.0.0.0/0            0.0.0.0/0            /* kubernetes firewall for dropping marked packets */ mark match 0x8000/0x8000
@@ -191,7 +188,7 @@ Kubernetes master is running at https://192.168.26.10:6443
 KubeDNS is running at https://192.168.26.10:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 ```
 
-Amen.
+Wrapping up.
 
 ```console
 root@master:/home/vagrant# kubectl delete ns microservices
