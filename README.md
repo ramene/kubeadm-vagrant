@@ -42,17 +42,17 @@ Installation
 ```bash
 vagrant ssh master
 sudo su
-kubectl get pods --all-namespaces
+kubectl get po,svc --all-namespaces -o wide
 helm init
 kubeadm token create
-148a37.736fd53655b767b7   # KUBETOKEN
+148a37.736fd53655b767b7
 ```
 
 > Let's modify our Vagrantfile once again, taking note of the token created in the previous step
 
 ```console
 SETUP_NODES = true
-KUBETOKEN = "<new token>"
+KUBETOKEN = "<token>"
 ```
 
 ``` vagrant up ```
