@@ -18,6 +18,7 @@ The following assumptions are made
 ### Prerequisites
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- [tunnelblick](https://tunnelblick.net/downloads.html)
 - [oracle virtualbox](https://www.virtualbox.org/wiki/Downloads) 
 - [vagrant](https://www.vagrantup.com/downloads.html)
 - vagrant-hostmanager ( `vagrant plugin install vagrant-hostmanager` )
