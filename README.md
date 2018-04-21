@@ -82,6 +82,65 @@ $ cp $HOME/.kube/config $HOME/.kube/config_backup
 $ cp config $HOME/.kube/config
 ```
 
+### Part 0.1a - Deploying Helm OpenVPN
+
+```console
+root@master:/home/vagrant# helm install stable/openvpn
+NAME:   ranting-prawn
+LAST DEPLOYED: Sat Apr 21 05:18:12 2018
+NAMESPACE: default
+STATUS: DEPLOYED
+
+RESOURCES:
+==> v1/ConfigMap
+NAME                   DATA  AGE
+ranting-prawn-openvpn  4     0s
+
+==> v1/PersistentVolumeClaim
+NAME                   STATUS   VOLUME  CAPACITY  ACCESS MODES  STORAGECLASS  AGE
+ranting-prawn-openvpn  Pending  0s
+
+==> v1/Service
+NAME                   TYPE          CLUSTER-IP  EXTERNAL-IP  PORT(S)        AGE
+ranting-prawn-openvpn  LoadBalancer  10.101.0.1  <pending>    443:32382/TCP  0s
+
+==> v1beta1/Deployment
+NAME                   DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
+ranting-prawn-openvpn  1        1        1           0          0s
+
+==> v1/Pod(related)
+NAME                                    READY  STATUS   RESTARTS  AGE
+ranting-prawn-openvpn-6988db5994-nbzx6  0/1    Pending  0         0s
+
+
+NOTES:
+OpenVPN is now starting.
+
+Please be aware that certificate generation is variable and may take some time (minutes).
+
+Check pod status with the command:
+
+  POD_NAME=$(kubectl get pods -l type=openvpn -o jsonpath='{ .items[0].metadata.name }') && kubectl log $POD_NAME --follow
+
+LoadBalancer ingress creation can take some time as well. Check service status with the command:
+
+  kubectl get svc
+
+Once the external IP is available and all the server certificates are generated create client key .ovpn files by pasting the following into a shell:
+
+  POD_NAME=$(kubectl get pods --namespace default -l type=openvpn -o jsonpath='{ .items[0].metadata.name }')
+  SERVICE_NAME=$(kubectl get svc --namespace default -l type=openvpn  -o jsonpath='{ .items[0].metadata.name }')
+  SERVICE_IP=$(kubectl get svc --namespace default $SERVICE_NAME -o go-template='{{ range $k, $v := (index .status.loadBalancer.ingress 0)}}{{ $v }}{{end}}')
+  KEY_NAME=kubeVPN
+  kubectl --namespace default exec -it $POD_NAME /etc/openvpn/setup/newClientCert.sh $KEY_NAME $SERVICE_IP
+  kubectl --namespace default exec -it $POD_NAME cat /etc/openvpn/certs/pki/$KEY_NAME.ovpn > $KEY_NAME.ovpn
+
+Copy the resulting $KEY_NAME.ovpn file to your open vpn client (ex: in tunnelblick, just double click on the file).  Do this for each user that needs to connect to the VPN.  Change KEY_NAME for each additional user.
+```
+
+
+
+
 ### Part 0.2 - Post Deployment
 
 As [outlined in Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc2119700bf444#part-1---leveraging-kubernetes-and-cloud-native-microservices), let's deploy the same example [cloud native microservice](https://github.com/kubernauts/dok-example-us) from [Michael Hausenblas](https://github.com/mhausenblas)
