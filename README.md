@@ -23,6 +23,20 @@ The following assumptions are made
 - [vagrant](https://www.vagrantup.com/downloads.html)
 - vagrant-hostmanager ( `vagrant plugin install vagrant-hostmanager` )
 
+### What all we're deploying
+
+Kubernetes works in server-client setup, where it has a master providing centralized control for a number of nodes. We will be deploying a Kubernetes master with 2 nodes.
+
+Kubernetes has several components, outlined below:
+
+    1. etcd - A highly available key-value store for shared configuration and service discovery.
+    2. flannel - An etcd backed network fabric for containers.
+    3. kube-apiserver - Provides the API for Kubernetes orchestration.
+    4. kube-controller-manager - Enforces Kubernetes services.
+    5. kube-scheduler - Schedules containers on hosts.
+    6. kubelet - Processes a container manifest so the containers are launched according to how they are described.
+    7. kube-proxy - Provides network proxy services.
+
 Installation
 
 - Clone the kubeadm-vagrant repo
