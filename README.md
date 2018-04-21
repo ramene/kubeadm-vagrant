@@ -143,28 +143,23 @@ ACCEPT     all  --  0.0.0.0/0            10.244.0.0/16        /* kubernetes forw
 ```console
 root@master:/home/vagrant# kubectl get po,no,svc --all-namespaces -o wide
 NAMESPACE     NAME                                 READY     STATUS    RESTARTS   AGE       IP              NODE
-kube-system   pod/etcd-master                      1/1       Running   0          18h       192.168.26.10   master
-kube-system   pod/kube-apiserver-master            1/1       Running   0          18h       192.168.26.10   master
-kube-system   pod/kube-controller-manager-master   1/1       Running   0          18h       192.168.26.10   master
-kube-system   pod/kube-dns-86f4d74b45-p9nhv        3/3       Running   0          18h       10.244.0.2      master
-kube-system   pod/kube-flannel-ds-27d5p            1/1       Running   1          18h       192.168.26.11   node1
-kube-system   pod/kube-flannel-ds-pmv5s            1/1       Running   0          18h       192.168.26.10   master
-kube-system   pod/kube-flannel-ds-xw5v5            1/1       Running   0          18h       192.168.26.12   node2
-kube-system   pod/kube-proxy-9qcbk                 1/1       Running   0          18h       192.168.26.12   node2
-kube-system   pod/kube-proxy-rwtvd                 1/1       Running   0          18h       192.168.26.11   node1
-kube-system   pod/kube-proxy-vn8bp                 1/1       Running   0          18h       192.168.26.10   master
-kube-system   pod/kube-scheduler-master            1/1       Running   0          18h       192.168.26.10   master
-kube-system   pod/tiller-deploy-df4fdf55d-vz7lj    1/1       Running   0          18h       10.244.1.2      node1
+default       pod/nginx-65899c769f-zkq2n           1/1       Running   0          1h        172.17.1.9      node1
+kube-system   pod/etcd-master                      1/1       Running   0          2h        192.168.26.20   master
+kube-system   pod/kube-apiserver-master            1/1       Running   0          2h        192.168.26.20   master
+kube-system   pod/kube-controller-manager-master   1/1       Running   0          2h        192.168.26.20   master
+kube-system   pod/kube-dns-86f4d74b45-gkt89        3/3       Running   0          2h        172.17.0.2      master
+kube-system   pod/kube-flannel-ds-6dnk2            1/1       Running   0          2h        192.168.26.20   master
+kube-system   pod/kube-flannel-ds-jtt55            1/1       Running   0          2h        192.168.26.11   node1
+kube-system   pod/kube-proxy-ggtjx                 1/1       Running   0          2h        192.168.26.20   master
+kube-system   pod/kube-proxy-jlrrl                 1/1       Running   0          2h        192.168.26.11   node1
+kube-system   pod/kube-scheduler-master            1/1       Running   0          2h        192.168.26.20   master
+kube-system   pod/tiller-deploy-df4fdf55d-ctffw    1/1       Running   0          1h        172.17.1.3      node1
 
-NAME          STATUS    ROLES     AGE       VERSION   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
-node/master   Ready     master    18h       v1.10.1   <none>        Ubuntu 16.04.4 LTS   4.4.0-119-generic   docker://1.13.1
-node/node1    Ready     <none>    18h       v1.10.1   <none>        Ubuntu 16.04.4 LTS   4.4.0-119-generic   docker://1.13.1
-node/node2    Ready     <none>    18h       v1.10.1   <none>        Ubuntu 16.04.4 LTS   4.4.0-119-generic   docker://1.13.1
-
-NAMESPACE     NAME                    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE       SELECTOR
-default       service/kubernetes      ClusterIP   10.96.0.1        <none>        443/TCP         18h       <none>
-kube-system   service/kube-dns        ClusterIP   10.96.0.10       <none>        53/UDP,53/TCP   18h       k8s-app=kube-dns
-kube-system   service/tiller-deploy   ClusterIP   10.101.156.225   <none>        44134/TCP       18h       app=helm,name=tiller
+NAMESPACE     NAME                    TYPE        CLUSTER-IP       EXTERNAL-IP     PORT(S)         AGE       SELECTOR
+default       service/kubernetes      ClusterIP   10.96.0.1        <none>          443/TCP         2h        <none>
+default       service/nginx           ClusterIP   10.96.117.96     192.168.26.11   80/TCP          1h        run=nginx
+kube-system   service/kube-dns        ClusterIP   10.96.0.10       <none>          53/UDP,53/TCP   2h        k8s-app=kube-dns
+kube-system   service/tiller-deploy   ClusterIP   10.102.143.182   <none>          44134/TCP       1h        app=helm,name=tiller
 ```
 
 ### Part 0.3 - Leveraging Kubernetes and Cloud Native Microservices
