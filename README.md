@@ -163,6 +163,9 @@ As [outlined in Part 1](https://gist.github.com/ramene/e918aa4664d4c40189bc21197
 > _Want to see more?, run the following either on the `master` node or on the host_ .
 
   `$ KUBECONFIG=kube.config kubectl run -h | tail -n+$(kubectl run -h | grep -n Example | grep -Eo '^[^:]+') | head -n $(kubectl run -h | grep -n Options | grep -Eo '^[^:]+')`
+  
+> Open a shell to a running container
+    see: https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/
 
 #### _Kubernetes Cluster Networking_
 
