@@ -127,6 +127,43 @@ $ kubectl apply -f "https://gist.github.com/ramene/13db280174bfb9441f813e83a0d14
 ```console
 root@master:/home/vagrant# sudo iptables -L -n
 ...
+root@master:/home/vagrant# sudo iptables -L -n
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination
+KUBE-EXTERNAL-SERVICES  all  --  0.0.0.0/0            0.0.0.0/0            ctstate NEW /* kubernetes externally-visible service portals */
+KUBE-FIREWALL  all  --  0.0.0.0/0            0.0.0.0/0
+
+Chain FORWARD (policy DROP)
+target     prot opt source               destination
+WEAVE-NPC  all  --  0.0.0.0/0            0.0.0.0/0            /* NOTE: this must go before '-j KUBE-FORWARD' */
+NFLOG      all  --  0.0.0.0/0            0.0.0.0/0            state NEW nflog-group 86
+DROP       all  --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+KUBE-FORWARD  all  --  0.0.0.0/0            0.0.0.0/0            /* kubernetes forwarding rules */
+DOCKER-ISOLATION  all  --  0.0.0.0/0            0.0.0.0/0
+DOCKER     all  --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     all  --  172.17.0.0/16        0.0.0.0/0
+ACCEPT     all  --  0.0.0.0/0            172.17.0.0/16
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+KUBE-SERVICES  all  --  0.0.0.0/0            0.0.0.0/0            ctstate NEW /* kubernetes service portals */
+KUBE-FIREWALL  all  --  0.0.0.0/0            0.0.0.0/0
+
+Chain DOCKER (1 references)
+target     prot opt source               destination
+
+Chain DOCKER-ISOLATION (1 references)
+target     prot opt source               destination
+RETURN     all  --  0.0.0.0/0            0.0.0.0/0
+
+Chain KUBE-EXTERNAL-SERVICES (1 references)
+target     prot opt source               destination
+
 Chain KUBE-FIREWALL (2 references)
 target     prot opt source               destination
 DROP       all  --  0.0.0.0/0            0.0.0.0/0            /* kubernetes firewall for dropping marked packets */ mark match 0x8000/0x8000
@@ -134,9 +171,28 @@ DROP       all  --  0.0.0.0/0            0.0.0.0/0            /* kubernetes fire
 Chain KUBE-FORWARD (1 references)
 target     prot opt source               destination
 ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0            /* kubernetes forwarding rules */ mark match 0x4000/0x4000
-ACCEPT     all  --  10.244.0.0/16        0.0.0.0/0            /* kubernetes forwarding conntrack pod source rule */ ctstate RELATED,ESTABLISHED
-ACCEPT     all  --  0.0.0.0/0            10.244.0.0/16        /* kubernetes forwarding conntrack pod destination rule */ ctstate RELATED,ESTABLISHED
-```
+ACCEPT     all  --  172.17.0.0/16        0.0.0.0/0            /* kubernetes forwarding conntrack pod source rule */ ctstate RELATED,ESTABLISHED
+ACCEPT     all  --  0.0.0.0/0            172.17.0.0/16        /* kubernetes forwarding conntrack pod destination rule */ ctstate RELATED,ESTABLISHED
+
+Chain KUBE-SERVICES (1 references)
+target     prot opt source               destination
+
+Chain WEAVE-NPC (1 references)
+target     prot opt source               destination
+ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+ACCEPT     all  --  0.0.0.0/0            224.0.0.0/4
+WEAVE-NPC-DEFAULT  all  --  0.0.0.0/0            0.0.0.0/0            state NEW
+WEAVE-NPC-INGRESS  all  --  0.0.0.0/0            0.0.0.0/0            state NEW
+ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0            ! match-set weave-local-pods dst
+
+Chain WEAVE-NPC-DEFAULT (1 references)
+target     prot opt source               destination
+ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0            match-set weave-E.1.0W^NGSp]0_t5WwH/]gX@L dst /* DefaultAllow isolation for namespace: default */
+ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0            match-set weave-?b%zl9GIe0AET1(QI^7NWe*fO dst /* DefaultAllow isolation for namespace: kube-system */
+ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0            match-set weave-0EHD/vdN#O4]V?o4Tx7kS;APH dst /* DefaultAllow isolation for namespace: kube-public */
+
+Chain WEAVE-NPC-INGRESS (1 references)
+target     prot opt source               destination```
 
 #### _Our current landscape might look like..._
 
