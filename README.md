@@ -88,7 +88,7 @@ node1     Ready     <none>    30m       v1.10.0
 node2     Ready     <none>    28m       v1.10.0
 ```
 
-> _Alternatively, if you'd like to merge your kube.config with $HOME/.kube/config, run the following_
+> _Recommended, if you're working across multiple clusters, merge your kube.config with $HOME/.kube/config by running the following_
 
 ```console
 $ KUBECONFIG=$HOME/.kube/config:./kube.config kubectl config view --flatten --> config
