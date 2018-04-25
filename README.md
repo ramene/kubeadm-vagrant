@@ -193,29 +193,6 @@ ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0            match-set weave-0E
 
 Chain WEAVE-NPC-INGRESS (1 references)
 target     prot opt source               destination```
-
-#### _Our current landscape might look like..._
-
-```console
-root@master:/home/vagrant# kubectl get po,no,svc --all-namespaces -o wide
-NAMESPACE     NAME                                 READY     STATUS    RESTARTS   AGE       IP              NODE
-default       pod/nginx-65899c769f-zkq2n           1/1       Running   0          1h        172.17.1.9      node1
-kube-system   pod/etcd-master                      1/1       Running   0          2h        192.168.26.20   master
-kube-system   pod/kube-apiserver-master            1/1       Running   0          2h        192.168.26.20   master
-kube-system   pod/kube-controller-manager-master   1/1       Running   0          2h        192.168.26.20   master
-kube-system   pod/kube-dns-86f4d74b45-gkt89        3/3       Running   0          2h        172.17.0.2      master
-kube-system   pod/kube-flannel-ds-6dnk2            1/1       Running   0          2h        192.168.26.20   master
-kube-system   pod/kube-flannel-ds-jtt55            1/1       Running   0          2h        192.168.26.11   node1
-kube-system   pod/kube-proxy-ggtjx                 1/1       Running   0          2h        192.168.26.20   master
-kube-system   pod/kube-proxy-jlrrl                 1/1       Running   0          2h        192.168.26.11   node1
-kube-system   pod/kube-scheduler-master            1/1       Running   0          2h        192.168.26.20   master
-kube-system   pod/tiller-deploy-df4fdf55d-ctffw    1/1       Running   0          1h        172.17.1.3      node1
-
-NAMESPACE     NAME                    TYPE        CLUSTER-IP       EXTERNAL-IP     PORT(S)         AGE       SELECTOR
-default       service/kubernetes      ClusterIP   10.96.0.1        <none>          443/TCP         2h        <none>
-default       service/nginx           ClusterIP   10.96.117.96     192.168.26.11   80/TCP          1h        run=nginx
-kube-system   service/kube-dns        ClusterIP   10.96.0.10       <none>          53/UDP,53/TCP   2h        k8s-app=kube-dns
-kube-system   service/tiller-deploy   ClusterIP   10.102.143.182   <none>          44134/TCP       1h        app=helm,name=tiller
 ```
 
 ### Part 0.3 - Leveraging Kubernetes and Cloud Native Microservices
